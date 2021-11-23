@@ -1,0 +1,14 @@
+<launch>
+  <node
+    pkg="first_pkg"
+    type="hello_world_pub.py"
+    name="hello_world_pub"
+    output="screen"
+  />
+  <node
+    pkg="first_pkg"
+    type="hello_world_sub.py"
+    name="hello_world_sub"
+    output="screen"
+  />
+</launch>
