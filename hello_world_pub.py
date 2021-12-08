@@ -2,7 +2,8 @@
 # license removed for brevity
 import rospy
 from std_msgs.msg import String
- 
+
+#Just a test to see if I can push  
 def talker():
     pub = rospy.Publisher('chatter', String, queue_size=10)
     rospy.init_node('talker', anonymous=True)
@@ -12,7 +13,7 @@ def talker():
         rospy.loginfo(hello_str)
         pub.publish(hello_str)
         rate.sleep()
- 
+
 if __name__ == '__main__':
     try:
         talker()
