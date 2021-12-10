@@ -9,11 +9,40 @@ import cv2  # OpenCV library
 from cv_bridge import CvBridge  # Package to convert between ROS and OpenCV Images
 from sensor_msgs.msg import Image  # Message type in which the images are received
 from std_msgs.msg import String
+from tensorflow.keras.models import load_model
+import numpy as np
 
 
 class Recognizer:
     def __init__(self):
-        self.pub = rospy.Publisher("vision_decision", String, queue_size=5)
+        self.pub = rospy.Publisher("letter", String, queue_size=5)
+        self.model = load_model("/data/ASLModel.h5")
+        self.classes = [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+            "F",
+            "G",
+            "H",
+            "I",
+            "K",
+            "L",
+            "M",
+            "N",
+            "O",
+            "P",
+            "Q",
+            "R",
+            "S",
+            "T",
+            "U",
+            "V",
+            "W",
+            "X",
+            "Y",
+        ]
 
     # This function is executed every time an image is received
     def callback(self, data):
@@ -22,13 +51,14 @@ class Recognizer:
         br = CvBridge()
         current_frame = br.imgmsg_to_cv2(data)
 
-        self.pub.publish("A")
+        img = cv2.resize(current_frame, (640, 480))
+        img = np.reshape(img, (-1, 640, 480, 3))
 
-        # We display the image in a window named 'camera'
-        # cv2.imshow("camera", current_frame)
+        pred = self.model.predict(img)  # Softmax predictions
+        pred = np.argmax(pred)  # Index of most confident prediction
+        pred = self.classes[pred]  # Letter corresponding to index
 
-        # This window remains open until we press the key number 1
-        # cv2.waitKey(1)
+        self.pub.publish(pred)
 
     def receive_message(self,):
 
