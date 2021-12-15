@@ -16,5 +16,6 @@ following commands:
 
 These are case-sensitive commands.
 
-In order to launch the program, we execute the 'roslaunch' command in the terminal, as follows:
-roslaunch first_pkg first.launch
+In order to launch the program, we execute the command 'roslaunch' in the terminal as follows:
+
+`roslaunch first_pkg first.launch`
