@@ -1,14 +1,20 @@
 <launch>
   <node
     pkg="first_pkg"
-    type="hello_world_pub.py"
-    name="hello_world_pub"
+    type="webcam_pub.py"
+    name="webcam_pub"
     output="screen"
   />
   <node
     pkg="first_pkg"
-    type="hello_world_sub.py"
-    name="hello_world_sub"
+    type="vision_node.py"
+    name="vision_node"
+    output="screen"
+  />
+  <node
+    pkg="first_pkg"
+    type="mobility_node.py"
+    name="mobility_node"
     output="screen"
   />
 </launch>
