@@ -15,3 +15,6 @@ following commands:
 7. `s` &rarr; Spin in place  
 
 These are case-sensitive commands.
+
+In order to launch the program, we execute the 'roslaunch' command in the terminal, as follows:
+roslaunch first_pkg first.launch
